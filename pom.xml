@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!-- Model Version -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>wd-eb-sample</groupId>
+	<artifactId>webdriver-easyb</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<properties>
+		<version.selenium>2.0rc2</version.selenium>
+		<version.fest.assert>1.4</version.fest.assert>
+		<version.maven.compiler>2.3.1</version.maven.compiler>
+		<version.groovy.eclipse.compiler>2.5.1-M3</version.groovy.eclipse.compiler>
+		<version.maven.easyb.plugin>0.9.7-1</version.maven.easyb.plugin>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>${version.fest.assert}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.20.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easyb</groupId>
+			<artifactId>easyb-junit</artifactId>
+			<version>0.5.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easyb</groupId>
+			<artifactId>easyb</artifactId>
+			<version>0.99</version>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easyb</groupId>
+			<artifactId>maven-easyb-plugin</artifactId>
+			<version>1.4</version>
+			<type>maven-plugin</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.maven.compiler}</version>
+				<configuration>
+					<compilerId>groovy-eclipse-compiler</compilerId>
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>${version.groovy.eclipse.compiler}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.easyb</groupId>
+				<artifactId>maven-easyb-plugin</artifactId>
+				<version>${version.maven.easyb.plugin}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<easybTestDirectory>${basedir}/src/test/groovy</easybTestDirectory>
+					<xmlReport>${project.build.directory}/easyb/easyb-report.xml</xmlReport>
+					<storyType>html</storyType>
+					<storyReport>${project.build.directory}/easyb/site/index.html</storyReport>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
